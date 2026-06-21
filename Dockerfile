@@ -1,10 +1,12 @@
 FROM runpod/worker-comfyui:5.7.1-sdxl
 
+RUN python -m pip uninstall -y onnxruntime onnxruntime-gpu || true
+
 RUN python -m pip install --no-cache-dir \
     pillow \
     numpy \
     opencv-python-headless \
-    onnxruntime-gpu
+    "onnxruntime-gpu==1.20.1"
 
 COPY censor.py /censor.py
 COPY patch_handler.py /patch_handler.py
